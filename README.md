@@ -33,6 +33,8 @@ Optional flags:
 1. Create a Google Cloud project → enable the **Google Sheets API**.
 2. Create a **service account** in that project → create a JSON key →
    download it as `credentials.json` into this directory (it's gitignored).
+   Alternatively (e.g. for cloud runs), set the env var
+   `GOOGLE_CREDENTIALS_JSON` to the full JSON contents of the key file.
 3. Open the target Google Sheet → **Share** → add the service account's
    email (`...@...iam.gserviceaccount.com`) as **Editor**.
 4. Put the Sheet ID (the long string in the sheet URL between `/d/` and
