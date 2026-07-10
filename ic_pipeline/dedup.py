@@ -5,9 +5,16 @@ sync any keys found in the sheet's Processed tab, so the dedup survives
 moving between machines.
 """
 
+import csv
+import os
 import re
 import sqlite3
 from datetime import date
+
+# Text registry committed to the repo so dedup survives fresh clones
+# (used by the daily lite mode, where each run is a new container).
+PROCESSED_REGISTRY = os.path.join("data", "processed.csv")
+REGISTRY_HEADERS = ["key", "company", "domain", "date", "outcome"]
 
 # Legal-entity suffixes stripped when normalizing company names.
 _LEGAL_SUFFIXES = (
@@ -75,3 +82,23 @@ class SeenStore:
 
     def close(self):
         self.conn.close()
+
+
+def load_registry() -> dict[str, str]:
+    """Read the committed processed.csv registry: key -> outcome."""
+    if not os.path.exists(PROCESSED_REGISTRY):
+        return {}
+    with open(PROCESSED_REGISTRY, newline="") as fh:
+        return {row["key"]: row.get("outcome", "") for row in csv.DictReader(fh)}
+
+
+def append_registry(rows: list[dict]):
+    """Append rows ({key, company, domain, date, outcome}) to processed.csv."""
+    os.makedirs(os.path.dirname(PROCESSED_REGISTRY), exist_ok=True)
+    exists = os.path.exists(PROCESSED_REGISTRY)
+    with open(PROCESSED_REGISTRY, "a", newline="") as fh:
+        writer = csv.DictWriter(fh, fieldnames=REGISTRY_HEADERS)
+        if not exists:
+            writer.writeheader()
+        for row in rows:
+            writer.writerow({h: row.get(h, "") for h in REGISTRY_HEADERS})
