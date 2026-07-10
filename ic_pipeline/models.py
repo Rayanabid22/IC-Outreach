@@ -36,6 +36,7 @@ class Lead:
     # Stage 4 (enrichment) fields
     x_handle: str = ""
     x_active: bool = False
+    x_dms: str = "unknown"  # open | closed | unknown (best-effort)
     linkedin_url: str = ""
     instagram: str = ""
     instagram_active: bool | None = None
@@ -58,6 +59,7 @@ class Lead:
             self.raw.source,
             self.x_handle,
             "TRUE" if self.x_active else "FALSE",
+            self.x_dms,
             self.linkedin_url,
             self.instagram,
             self.discord,
@@ -73,8 +75,8 @@ class Lead:
 LEADS_HEADERS = [
     "Date Added", "Company", "Website", "Category", "Region",
     "Funding (stage/amount)", "Announced Date", "Source", "X Handle",
-    "X Active", "LinkedIn", "Instagram", "Discord", "Email", "Founder",
-    "Founder X", "Founder LinkedIn", "Fit Reasoning",
+    "X Active", "X DMs", "LinkedIn", "Instagram", "Discord", "Email",
+    "Founder", "Founder X", "Founder LinkedIn", "Fit Reasoning",
 ]
 
 PROCESSED_HEADERS = ["Key", "Company", "Domain", "Date Processed", "Outcome"]

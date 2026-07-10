@@ -286,6 +286,7 @@ def append_leads_file(path: str, dry_run: bool):
                 fit_reasoning=str(item.get("fit_reasoning", "")),
                 x_handle=str(item.get("x_handle", "")).lstrip("@"),
                 x_active=bool(item.get("x_active")),
+                x_dms=str(item.get("x_dms", "") or "unknown"),
                 linkedin_url=str(item.get("linkedin_url", "")),
                 instagram=str(item.get("instagram", "")),
                 instagram_active=item.get("instagram_active"),

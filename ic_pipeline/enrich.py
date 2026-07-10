@@ -22,12 +22,15 @@ priority signal; check it carefully.
 (founders are usually quoted), the company's /about page, X bios, or Crunchbase. \
 If not found after ~2 search attempts, leave blank and move on.
 - email: a contact/hello email from the site or press releases; blank if not found.
+- x_dms: best-effort DM availability on the company's X account — "open" only if
+you find clear evidence (bio says DMs open, message button mentioned, they ask
+people to DM them), "closed" only with clear evidence, otherwise "unknown".
 - Leave any field you cannot find as "" (or null for instagram_active).
 - x_handle should be the bare handle without the @ (e.g. "acmehq").
 
 Respond with ONLY this JSON object, no prose:
 {{
-  "x_handle": "", "x_active": false,
+  "x_handle": "", "x_active": false, "x_dms": "unknown",
   "linkedin_url": "",
   "instagram": "", "instagram_active": null,
   "discord": "",
@@ -54,6 +57,7 @@ def enrich(lead: Lead, stats: RunStats) -> Lead:
 
     lead.x_handle = str(data.get("x_handle") or "").lstrip("@")
     lead.x_active = bool(data.get("x_active"))
+    lead.x_dms = str(data.get("x_dms") or "unknown")
     lead.linkedin_url = str(data.get("linkedin_url") or "")
     lead.instagram = str(data.get("instagram") or "")
     ig_active = data.get("instagram_active")

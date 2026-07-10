@@ -10,18 +10,30 @@ You are the research engine. Do NOT call the Anthropic API and do NOT expect
 WebSearch tool. Direct HTTP to news sites is blocked in this sandbox; rely on
 WebSearch only.
 
-**Target: 10–20 qualified leads.** Never pad — a short honest list beats a
-padded one. Stop early once you hit 20.
+**MINIMUM: 10 qualified leads. Target: 10–20.** Ten is the floor the
+business needs — do not stop below it while there is still searching left
+to do. Escalate effort until you reach 10:
+
+1. Start with funding announced in the last 1–3 days.
+2. Short of 10? Widen to 7 days, then 14, then 30.
+3. Still short? Run more collection searches (niche-specific queries,
+   site: queries against funding-news sites) and work through candidates
+   you haven't researched yet — anything not in `data/processed.csv` is
+   fair game, including names earlier runs left unprocessed.
+4. Only stop below 10 when you have genuinely exhausted the candidate
+   pool (roughly 60+ searches with no fresh names left). Never pad with
+   unqualified companies to hit the number — if you end below 10, say so
+   plainly in the summary and explain what ran out.
 
 ## Step 1 — Find candidates (WebSearch)
 
-Run 8–12 searches for companies that announced funding in the **last 1–3
-days** (widen to 7 days only if you can't find enough). Good query shapes:
+Run 8–12 searches (more if below minimum) for companies that announced
+funding in the window above. Good query shapes:
 
-- `startup raises seed funding <today's date / this week>`
-- `"Series A" AI startup announcement <month year>`
-- `fintech startup raises seed <month year>`
-- `SaaS startup funding announced this week`
+- `startup raises Series A <today's date / this week>`
+- `"Series A" OR "Series B" AI startup announcement <month year>`
+- `fintech startup raises Series A <month year>`
+- `SaaS startup Series B funding announced this week`
 - `site:finsmes.com raises <month year>` and similar for techcrunch.com,
   eu-startups.com, betakit.com, thesaasnews.com
 - One or two UK/EU/Canada-flavored queries
@@ -38,6 +50,13 @@ python pipeline.py check "Name One" "Name Two" ...
 Drop everything marked `SEEN`. Only research `NEW` names.
 
 ## Step 3 — ICP filter
+
+**Stage gate (apply FIRST): Series A or Series B rounds ONLY.**
+Reject pre-seed, seed, Series C+, growth/late-stage, and IPO-track
+companies with reason "stage out of scope". Rationale: Series A/B
+companies are big enough to have budget but small enough to actually
+reply to outreach. When a search result is a roundup, confirm the stage
+from the original announcement.
 
 In-ICP (keep): SaaS, AI, Tech/Software, Fintech, Trading platforms/
 infrastructure, Biotech (AI-software side only — not wet-lab pharma).
@@ -59,6 +78,17 @@ or `"<company>" twitter recent posts`; look at post dates in results).
   confirmed-active also qualifies (best effort).
 - A LinkedIn URL alone does NOT qualify. Record the LinkedIn company URL but
   never attempt to check LinkedIn activity.
+- **X DM status (best-effort, record as `x_dms`: "open" | "closed" |
+  "unknown"):** search snippets can't render the Message button, so only
+  mark "open" or "closed" with clear evidence (bio says "DMs open", the
+  account invites DMs, press/contact pages point to X DMs). Default to
+  "unknown" — do NOT reject a lead for unknown DM status.
+- **Contactability rule (compensates for unknown DMs):** every qualified
+  lead must have at least TWO contact paths among: company X handle,
+  founder X handle, contact email. If after research a lead has only one
+  path, spend 1-2 extra searches on email/founder before accepting it;
+  if it still has just one path, accept it only when needed for the
+  10-lead minimum and flag it in the summary.
 - Bonus (never blocking, ~2 searches max each): founder name/title/X/LinkedIn
   (funding articles usually quote founders) and a contact/hello email.
 
@@ -77,10 +107,10 @@ unknown):
 ```json
 {
   "company": "Acme AI", "website": "https://acme.ai",
-  "category": "AI", "region": "US", "funding": "Seed, $5M",
+  "category": "AI", "region": "US", "funding": "Series A, $12M",
   "announced_date": "2026-07-08", "source": "TechCrunch",
   "source_url": "https://...", "fit_reasoning": "one line",
-  "x_handle": "acmeai", "x_active": true,
+  "x_handle": "acmeai", "x_active": true, "x_dms": "unknown",
   "linkedin_url": "", "instagram": "", "instagram_active": null,
   "discord": "", "email": "",
   "founder_name": "", "founder_title": "", "founder_x": "", "founder_linkedin": "",
@@ -100,8 +130,9 @@ git add data/ && git commit -m "Daily leads <date>: N qualified" && git push -u 
 
 If the working branch differs from `claude/ic-funded-leads-pipeline-ejhq0y`,
 push to the current branch instead. Finish with a short summary: qualified
-count, X-active count, founder-found count, rejects with reasons, and the
-CSV path.
+count vs the 10 minimum, X-active count, DM status breakdown
+(open/closed/unknown), leads with only one contact path (flag them),
+founder-found count, rejects with reasons, and the CSV path.
 
 ## Lessons from prior runs (keep applying these)
 
