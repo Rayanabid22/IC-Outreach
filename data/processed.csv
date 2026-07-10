@@ -1,0 +1,19 @@
+key,company,domain,date,outcome
+ollama,Ollama,ollama.com,2026-07-10,qualified
+primeintellect,Prime Intellect,www.primeintellect.ai,2026-07-10,qualified
+monogram,Monogram,www.monogram.ai,2026-07-10,qualified
+edxmarkets,EDX Markets,edxmarkets.com,2026-07-10,rejected: ICP fit (institutional trading venue) but X (@markets_edx) dormant since ~April — no confirmed-active social
+netris,Netris,www.netris.io,2026-07-10,rejected: ICP fit (network automation for AI clouds) but company X (@netris_io) activity within 30d unconfirmed
+linqalpha,LinqAlpha,www.linqalpha.com,2026-07-10,rejected: ICP fit (AI research for hedge funds) but no company X presence found
+kredosai,KredosAi,kredosai.com,2026-07-10,rejected: ICP fit (AI payment-reminder SaaS) but no X presence found
+leapxpert,LeapXpert,www.leapxpert.com,2026-07-10,"rejected: ICP fit (compliance messaging SaaS, $180M Jun 30) but X (@leapxpert) activity within 30d unconfirmed"
+arca,Arca,arcawealth.com,2026-07-10,"rejected: ICP fit (AI wealth management, $64M) but no active social confirmed; announced Jun 24"
+equilibre,EquiLibre Technologies,,2026-07-10,"rejected: Not ICP: proprietary AI trading fund trading its own capital, not a trading platform/infrastructure product"
+venice,Venice,,2026-07-10,rejected: Excluded: uncensored AI platform with adult-content generation risk (halal gate)
+kaonai,Kaon AI,,2026-07-10,rejected: Excluded: AI companion/roleplay app (Emochi) — adult-content risk; company X unconfirmed
+arkenstonedefense,Arkenstone Defense,,2026-07-10,rejected: Not ICP: defense/weapons company
+beelinemedicines,Beeline Medicines,,2026-07-10,rejected: Not ICP: wet-lab clinical-stage biotech (drug development)
+alchemabtherapeutics,Alchemab Therapeutics,,2026-07-10,rejected: Not ICP: wet-lab biotech
+quantumdiamonds,QuantumDiamonds,,2026-07-10,rejected: Not ICP: quantum sensing hardware
+venusaerospace,Venus Aerospace,,2026-07-10,rejected: Not ICP: rocket engine / aerospace hardware
+sambanova,SambaNova,,2026-07-10,"rejected: Not ICP: AI chip/hardware maker, late stage ($1B Series F)"

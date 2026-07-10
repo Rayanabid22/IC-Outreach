@@ -102,3 +102,21 @@ If the working branch differs from `claude/ic-funded-leads-pipeline-ejhq0y`,
 push to the current branch instead. Finish with a short summary: qualified
 count, X-active count, founder-found count, rejects with reasons, and the
 CSV path.
+
+## Lessons from prior runs (keep applying these)
+
+- **Roundup articles re-report old news.** Always confirm the ORIGINAL
+  announcement date (press release / primary coverage) before treating a
+  company as fresh — a "July 9 roundup" often contains June rounds.
+- **X verification:** `site:x.com <company or handle>` is the best probe.
+  The gold standard is the company's own dated funding tweet. Tweet IDs
+  encode time (bigger = newer) — compare against a known-recent ID from the
+  same week to judge recency. An account whose newest indexed posts are
+  months old (e.g. a Series C the company never tweeted) is NOT active.
+- **Record only what you concluded.** If you researched a company and
+  couldn't confirm an active social → record as rejected (auditable).
+  If you never researched a candidate → do NOT record it; leave it
+  unmarked so a future run picks it up fresh.
+- **Prioritize consumer and dev-tool companies** — they verify on X far
+  more easily than enterprise B2B, so you get more qualified leads per
+  search. B2B-heavy days will yield fewer leads; that's fine, never pad.
