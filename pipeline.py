@@ -318,6 +318,9 @@ def append_leads_file(path: str, dry_run: bool):
     # 2. Committed dedup registry.
     append_registry(registry_rows)
 
+    # 2b. Rebuild the combined master sheet from all daily CSVs.
+    _rebuild_master_sheet()
+
     # 3. Google Sheet, best-effort (skipped silently if not configured).
     sheet_note = "sheet not configured — skipped"
     if config.SHEET_ID:
@@ -338,6 +341,30 @@ def append_leads_file(path: str, dry_run: bool):
     print(f"[append] {len(lead_rows)} leads -> {csv_path}; "
           f"{len(registry_rows)} rows -> registry; "
           f"{skipped} duplicates skipped; {sheet_note}")
+
+
+def _rebuild_master_sheet():
+    """Combine every daily CSV into data/leads/all-leads.csv, upgrading
+    rows written before the "X DMs" column existed."""
+    import glob
+
+    rows = []
+    for path in sorted(glob.glob(os.path.join("data", "leads", "????-??-??.csv"))):
+        with open(path, newline="") as fh:
+            reader = csv.reader(fh)
+            header = next(reader, None)
+            if header is None:
+                continue
+            for row in reader:
+                if "X DMs" not in header:
+                    row = row[:10] + ["unknown"] + row[10:]
+                rows.append(row)
+    master = os.path.join("data", "leads", "all-leads.csv")
+    with open(master, "w", newline="") as fh:
+        writer = csv.writer(fh)
+        writer.writerow(LEADS_HEADERS)
+        writer.writerows(rows)
+    print(f"[append] master sheet rebuilt: {len(rows)} total leads -> {master}")
 
 
 def main():
