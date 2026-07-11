@@ -1,6 +1,6 @@
 ---
 name: daily-leads
-description: Daily lite lead run — find 10-20 freshly funded ICP-fit companies using Claude's built-in web search (no API key), verify X activity, dedup against the committed registry, and commit results to data/leads/. Use when asked to run the daily leads, find today's leads, or on a scheduled daily-leads firing.
+description: Daily lite lead run — find 10-20 freshly funded ICP-fit companies (pre-seed through Series B, across US/UK/Canada/UAE/Australia/Europe) using Claude's built-in web search (no API key), verify X or Instagram activity, dedup against the committed registry, and commit results to data/leads/. Use when asked to run the daily leads, find today's leads, or on a scheduled daily-leads firing.
 ---
 
 # Daily Leads Run (lite mode — no API key)
@@ -30,13 +30,17 @@ to do. Escalate effort until you reach 10:
 Run 8–12 searches (more if below minimum) for companies that announced
 funding in the window above. Good query shapes:
 
-- `startup raises Series A <today's date / this week>`
+- `startup raises seed funding <today's date / this week>`
 - `"Series A" OR "Series B" AI startup announcement <month year>`
-- `fintech startup raises Series A <month year>`
-- `SaaS startup Series B funding announced this week`
+- `fintech startup raises seed OR Series A <month year>`
+- `SaaS startup pre-seed OR seed funding announced this week`
 - `site:finsmes.com raises <month year>` and similar for techcrunch.com,
   eu-startups.com, betakit.com, thesaasnews.com
-- One or two UK/EU/Canada-flavored queries
+- Region-dedicated queries — at least one each for: UK, Canada
+  (site:betakit.com works well), Dubai/UAE (`UAE startup raises`,
+  site:wamda.com, site:menabytes.com), Australia
+  (`Australian startup raises`, site:startupdaily.net), and Europe
+  (site:eu-startups.com, site:tech.eu)
 
 Collect ~30–40 candidate company names with their funding stage/amount,
 announcement date, and source URL.
@@ -51,31 +55,41 @@ Drop everything marked `SEEN`. Only research `NEW` names.
 
 ## Step 3 — ICP filter
 
-**Stage gate (apply FIRST): Series A or Series B rounds ONLY.**
-Reject pre-seed, seed, Series C+, growth/late-stage, and IPO-track
-companies with reason "stage out of scope". Rationale: Series A/B
-companies are big enough to have budget but small enough to actually
-reply to outreach. When a search result is a roundup, confirm the stage
-from the original announcement.
+**Stage gate (apply FIRST): Pre-seed, Seed, Series A, or Series B ONLY.**
+Reject Series C+, growth/late-stage, mega-rounds, and IPO-track companies
+with reason "stage out of scope". Rationale: early-stage companies are
+the ones that actually reply to outreach. When a search result is a
+roundup, confirm the stage from the original announcement.
 
 In-ICP (keep): SaaS, AI, Tech/Software, Fintech, Trading platforms/
 infrastructure, Biotech (AI-software side only — not wet-lab pharma).
 
 HARD exclusions (drop, with reason): gambling/betting; interest-based lending
 (BNPL/consumer credit whose core product is interest); alcohol/cannabis;
-adult content; Israeli companies. Region: prefer US/UK/Canada but do NOT
-exclude others — just record the region.
+adult content; Israeli companies. **Target regions — search ALL of these
+actively (dedicate collection queries to each): USA, UK, Canada, Dubai/UAE,
+Australia, and Europe.** Record the region; do NOT exclude other regions —
+just record them.
 
 Resolve each keeper's real brand name and website (search if needed).
 
 ## Step 4 — Verify socials (the qualification bar)
 
-For each ICP-fit company, search for its X (Twitter) handle and check the
-account has posted within the **last 30 days** (search `site:x.com <handle>`
-or `"<company>" twitter recent posts`; look at post dates in results).
+For each ICP-fit company, look for BOTH its X (Twitter) handle AND its
+Instagram account — check them in the same searches
+(`site:x.com <company>`, `site:instagram.com <company>`,
+`"<company>" twitter instagram official account`). Check activity within
+the **last 30 days** (post dates in results; a same-week funding
+announcement from an existing, non-dormant account counts as inferred
+activity — flag inferred vs confirmed).
 
-- Active X alone qualifies. If X can't be confirmed active, Instagram
-  confirmed-active also qualifies (best effort).
+- An active X OR an active Instagram qualifies — they are co-equal
+  signals now. Record both handles whenever both exist.
+- **Founder X accounts: always search for them** (funding articles quote
+  founders; check article bylines/quotes, then `site:x.com <founder name>`).
+  Founder X is the preferred outreach channel. BUT a lead with only the
+  company's X (or IG) and no findable founder handle still goes in the
+  final list — do not drop or hold it back for that.
 - A LinkedIn URL alone does NOT qualify. Record the LinkedIn company URL but
   never attempt to check LinkedIn activity.
 - **X DM status (best-effort, record as `x_dms`: "open" | "closed" |
@@ -83,12 +97,10 @@ or `"<company>" twitter recent posts`; look at post dates in results).
   mark "open" or "closed" with clear evidence (bio says "DMs open", the
   account invites DMs, press/contact pages point to X DMs). Default to
   "unknown" — do NOT reject a lead for unknown DM status.
-- **Contactability rule (compensates for unknown DMs):** every qualified
-  lead must have at least TWO contact paths among: company X handle,
-  founder X handle, contact email. If after research a lead has only one
-  path, spend 1-2 extra searches on email/founder before accepting it;
-  if it still has just one path, accept it only when needed for the
-  10-lead minimum and flag it in the summary.
+- **Contactability (best-effort, never blocking):** aim for two-plus
+  contact paths per lead (founder X > company X > Instagram > email).
+  If a lead has only the company account after 1-2 extra searches for
+  the founder/email, include it anyway and note it in the summary.
 - Bonus (never blocking, ~2 searches max each): founder name/title/X/LinkedIn
   (funding articles usually quote founders) and a contact/hello email.
 
@@ -130,9 +142,10 @@ git add data/ && git commit -m "Daily leads <date>: N qualified" && git push -u 
 
 If the working branch differs from `claude/ic-funded-leads-pipeline-ejhq0y`,
 push to the current branch instead. Finish with a short summary: qualified
-count vs the 10 minimum, X-active count, DM status breakdown
-(open/closed/unknown), leads with only one contact path (flag them),
-founder-found count, rejects with reasons, and the CSV path.
+count vs the 10 minimum, X-active and Instagram-active counts, DM status
+breakdown (open/closed/unknown), founder-X-found count (and which leads
+are company-account-only), region breakdown, rejects with reasons, and
+the CSV path.
 
 ## Lessons from prior runs (keep applying these)
 

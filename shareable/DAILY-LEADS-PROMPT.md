@@ -20,10 +20,12 @@ autonomously — do not ask me questions mid-run.
   categories, e.g. "SaaS, AI, Fintech..."]
 - **HARD EXCLUSIONS — never include:** [PLACEHOLDER — list disqualifiers,
   e.g. industries, business models, or regions you avoid]
-- **FUNDING STAGE:** Series A or Series B only (big enough to have budget,
-  small enough to reply). [adjust if you want seed or later stages]
-- **PREFERRED REGIONS:** [e.g. "US/UK/Canada preferred, others allowed —
-  record the region, don't exclude"]
+- **FUNDING STAGE:** Pre-seed, Seed, Series A, or Series B (early-stage
+  companies actually reply). Reject Series C+/growth/mega-rounds.
+  [adjust to your taste]
+- **TARGET REGIONS:** USA, UK, Canada, Dubai/UAE, Australia, Europe —
+  run dedicated searches for each; record the region, don't exclude
+  others. [adjust to your markets]
 - **MINIMUM LEADS:** 10 (never stop below this while candidates remain;
   never pad with unqualified companies)
 - **FRESHNESS:** funding announced in the last 1-3 days; widen to 7, then
@@ -45,16 +47,18 @@ autonomously — do not ask me questions mid-run.
    website. Record every rejection with a one-line reason.
 
 3. **Verify reachability (the qualification bar).** For each keeper,
-   search for its X (Twitter) handle and confirm the account posted within
-   the last 30 days (`site:x.com <company>` is the best probe; the
-   company's own dated funding tweet is the gold standard — an account
-   whose newest findable posts are months old is NOT active). An active X
-   qualifies; confirmed-active Instagram is the backup. A LinkedIn URL
-   alone never qualifies. Also record, best-effort: X DM availability
+   look for BOTH its X (Twitter) handle AND its Instagram account, and
+   confirm one of them was active within the last 30 days
+   (`site:x.com <company>` / `site:instagram.com <company>`; the
+   company's own dated funding post is the gold standard — an account
+   whose newest findable posts are months old is NOT active). An active
+   X or an active Instagram qualifies. A LinkedIn URL alone never
+   qualifies. Always search for the founder's X handle too (funding
+   articles quote founders) — founder X is the preferred outreach
+   channel, but a lead with only a company account still makes the
+   final list. Also record, best-effort: X DM availability
    ("open"/"closed"/"unknown" — only claim open/closed with clear
-   evidence), a contact email, and the founder's name/title/X handle.
-   Every qualified lead needs at least TWO contact paths (company X,
-   founder X, or email) — flag any that have only one.
+   evidence) and a contact email.
 
 4. **Output.** A markdown table (or CSV if I ask) with columns:
    Company | Website | Category | Region | Stage & Amount | Announced |

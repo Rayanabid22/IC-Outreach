@@ -16,7 +16,9 @@ Rules:
 - x_active: true ONLY if the company's X (Twitter) account has posted within the \
 last 30 days — verify via web search of the handle's recent posts. This is the \
 priority signal; check it carefully.
-- instagram_active: best-effort; null if you cannot tell.
+- instagram: actively look for the company's Instagram account — it is a
+co-equal qualification signal with X, not just a fallback.
+- instagram_active: true if posted within the last 30 days; null if you cannot tell.
 - linkedin_url: company page URL only — do NOT attempt to check LinkedIn activity.
 - Founder fields are a bonus, never required. Check the funding announcement \
 (founders are usually quoted), the company's /about page, X bios, or Crunchbase. \

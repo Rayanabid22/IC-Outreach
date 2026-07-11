@@ -21,7 +21,8 @@ Notes:
 - Names from SEC Form D filings are legal entities (e.g. "Acme Labs Inc.") — resolve \
 to the real consumer-facing brand name and website. If you cannot confidently identify \
 the company at all, mark is_icp_fit false with reasoning "could not resolve company".
-- Region: classify as US | UK | Canada | Other. Do NOT exclude on region alone.
+- Region: classify as US | UK | Canada | UAE | Australia | Europe | Other. \
+Do NOT exclude on region alone.
 - funding_stage_or_amount: stage and/or amount if known (e.g. "Seed, $4M").
 
 Companies to evaluate:
@@ -36,7 +37,7 @@ using exactly this schema:
     "website": "",
     "is_icp_fit": true,
     "category": "SaaS | AI | Tech/Software | Fintech | Trading platform | Biotech (AI software)",
-    "region": "US | UK | Canada | Other",
+    "region": "US | UK | Canada | UAE | Australia | Europe | Other",
     "funding_stage_or_amount": "",
     "reasoning_one_line": ""
   }}

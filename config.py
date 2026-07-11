@@ -61,6 +61,12 @@ NEWS_QUERIES = [
     '"raises" trading platform',
     '"secures funding" SaaS',
     '"pre-seed" startup software',
+    # Region-dedicated queries (target regions: USA, UK, Canada,
+    # Dubai/UAE, Australia, Europe)
+    '"raises" UAE OR Dubai startup',
+    '"raises" Australian startup software',
+    '"raises" Canadian startup software',
+    '"raises" European startup SaaS',
 ]
 
 # Static RSS feeds (name -> url).
